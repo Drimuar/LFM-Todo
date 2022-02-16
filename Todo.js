@@ -66,21 +66,21 @@ function showBy(priority) {
 		case "priority":
 			let low = PRIORITY.LOW + ":\n";
 			let high = PRIORITY.HIGH + ":\n";
-			for (const item of list) {
+			list.forEach(item => {
 				if (item.priority === PRIORITY.LOW) {
 					low += " " + item.name + "\n";
 				}
 				else if (item.priority === PRIORITY.HIGH) {
 					high += " " + item.name + "\n";
 				}
-			}
+			});
 			console.log(low + high);
 			break;
 		case "status":
 			let toDo = STATUS.TO_DO + ":\n";
 			let inProgress = STATUS.IN_PROGRESS + ":\n";
 			let done = STATUS.DONE + ":\n";
-			for (const item of list) {
+			list.forEach(item => {
 				if (item.status === STATUS.TO_DO) {
 					toDo += " " + item.name + "\n";
 				}
@@ -90,7 +90,7 @@ function showBy(priority) {
 				else if (item.status === STATUS.DONE) {
 					done += " " + item.name + "\n";
 				}
-			}
+			});
 			console.log(toDo + inProgress + done);
 			break;
 		default:
