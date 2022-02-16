@@ -1,60 +1,107 @@
 //А: Статусы нужно вынести в константы
 //const toDoStatus = "To Do"; ...
 //A: Пространство имен
-//const STATUS = {
-// 	TO_DO: "To Do",
-// 	DONE: "Done",
-// 	IN_PROGRESS: "In Progress"
-// }
+const STATUS = {
+	TO_DO: "To Do",
+	DONE: "Done",
+	IN_PROGRESS: "In Progress"
+}
 // default status
-// const DEFAULT_STATUS = STATUS.TO_DO;
+const DEFAULT_STATUS = STATUS.TO_DO;
 
-const list = {
-	"create a new practice task": "In Progress",
-	"make a bed": "Done",
-	"write a post": "To Do",
+const PRIORITY = {
+	LOW: "low",
+	HIGH: "high"
 }
 
+const DEFAULT_PRIORITY = PRIORITY.LOW;
+
+const list = [
+	{ name: "create a new practice task", status: STATUS.IN_PROGRESS, priority: PRIORITY.LOW },
+	{ name: "make a bed", status: STATUS.DONE, priority: PRIORITY.HIGH },
+	{ name: "write a post", status: STATUS.TO_DO, priority: PRIORITY.HIGH },
+]
+
 function changeStatus(task, status) {
-	for (const key in list) {
-		if (task === key) {
-			list[key] = status;
-			return;
+	for (const item of list) {
+		if (task === item.name) {
+			item.status = status;
 		}
 	}
-	return;
 }
 
 
 function addTask(task) {
-	list[task] = "To Do";
+	list.push({ name: task, status: DEFAULT_STATUS, priority: DEFAULT_PRIORITY });
 }
 
 function deleteTask(task) {
-	delete list[task];
+	list.forEach((item, index, arr) => {
+		if (item.name === task) {
+			arr.splice(index, 1);
+		}
+	});
 }
 
-function showList() {
-	let toDo = "Todo:\n"
-	let inProgress = "In Progress:\n"
-	let done = "Done:\n"
-	for (const key in list) {
-		if (list[key] === "To Do") {
-			toDo += " " + key + "\n";
-		}
-		else if (list[key] === "In Progress") {
-			inProgress += " " + key + "\n";
-		}
-		else if (list[key] === "Done") {
-			done += " " + key + "\n";
-		}
+// function showList() {
+// 	let toDo = STATUS.TO_DO + ":\n";
+// 	let inProgress = STATUS.IN_PROGRESS + ":\n";
+// 	let done = STATUS.DONE + ":\n";
+// 	for (const item of list) {
+// 		if (item.status === STATUS.TO_DO) {
+// 			toDo += " " + item.name + "\n";
+// 		}
+// 		else if (item.status === STATUS.IN_PROGRESS) {
+// 			inProgress += " " + item.name + "\n";
+// 		}
+// 		else if (item.status === STATUS.DONE) {
+// 			done += " " + item.name + "\n";
+// 		}
+// 	}
+// 	console.log(toDo + inProgress + done);
+// }
+
+function showBy(priority) {
+	switch (priority.trim().toLowerCase()) {
+		case "priority":
+			let low = PRIORITY.LOW + ":\n";
+			let high = PRIORITY.HIGH + ":\n";
+			for (const item of list) {
+				if (item.priority === PRIORITY.LOW) {
+					low += " " + item.name + "\n";
+				}
+				else if (item.priority === PRIORITY.HIGH) {
+					high += " " + item.name + "\n";
+				}
+			}
+			console.log(low + high);
+			break;
+		case "status":
+			let toDo = STATUS.TO_DO + ":\n";
+			let inProgress = STATUS.IN_PROGRESS + ":\n";
+			let done = STATUS.DONE + ":\n";
+			for (const item of list) {
+				if (item.status === STATUS.TO_DO) {
+					toDo += " " + item.name + "\n";
+				}
+				else if (item.status === STATUS.IN_PROGRESS) {
+					inProgress += " " + item.name + "\n";
+				}
+				else if (item.status === STATUS.DONE) {
+					done += " " + item.name + "\n";
+				}
+			}
+			console.log(toDo + inProgress + done);
+			break;
+		default:
+			console.log("wrong argument");
+			break;
 	}
-	console.log(toDo + inProgress + done);
 }
-
 
 changeStatus("write a post", "Done");
 addTask('watch TV')
 addTask('have a walk');
 deleteTask('have a walk');
-showList();
+showBy("priority ");
+showBy("Status");
