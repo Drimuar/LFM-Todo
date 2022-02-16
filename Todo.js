@@ -23,11 +23,11 @@ const list = [
 ]
 
 function changeStatus(task, status) {
-	for (const item of list) {
-		if (task === item.name) {
+	list.filter(item => {
+		if (item.name === task) {
 			item.status = status;
 		}
-	}
+	});
 }
 
 
@@ -36,30 +36,13 @@ function addTask(task) {
 }
 
 function deleteTask(task) {
-	list.forEach((item, index, arr) => {
+	list.filter((item, index, arr) => {
 		if (item.name === task) {
 			arr.splice(index, 1);
 		}
 	});
 }
 
-// function showList() {
-// 	let toDo = STATUS.TO_DO + ":\n";
-// 	let inProgress = STATUS.IN_PROGRESS + ":\n";
-// 	let done = STATUS.DONE + ":\n";
-// 	for (const item of list) {
-// 		if (item.status === STATUS.TO_DO) {
-// 			toDo += " " + item.name + "\n";
-// 		}
-// 		else if (item.status === STATUS.IN_PROGRESS) {
-// 			inProgress += " " + item.name + "\n";
-// 		}
-// 		else if (item.status === STATUS.DONE) {
-// 			done += " " + item.name + "\n";
-// 		}
-// 	}
-// 	console.log(toDo + inProgress + done);
-// }
 
 function showBy(priority) {
 	switch (priority.trim().toLowerCase()) {
