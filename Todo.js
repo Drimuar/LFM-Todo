@@ -1,3 +1,14 @@
+//А: Статусы нужно вынести в константы
+//const toDoStatus = "To Do"; ...
+//A: Пространство имен
+//const STATUS = {
+// 	TO_DO: "To Do",
+// 	DONE: "Done",
+// 	IN_PROGRESS: "In Progress"
+// }
+// default status
+// const DEFAULT_STATUS = STATUS.TO_DO;
+
 const list = {
 	"create a new practice task": "In Progress",
 	"make a bed": "Done",
@@ -14,6 +25,7 @@ function changeStatus(task, status) {
 	return;
 }
 
+
 function addTask(task) {
 	list[task] = "To Do";
 }
@@ -28,13 +40,13 @@ function showList() {
 	let done = "Done:\n"
 	for (const key in list) {
 		if (list[key] === "To Do") {
-			toDo = toDo + " " + key + "\n";
+			toDo += " " + key + "\n";
 		}
 		else if (list[key] === "In Progress") {
-			inProgress = inProgress + " " + key + "\n";
+			inProgress += " " + key + "\n";
 		}
 		else if (list[key] === "Done") {
-			done = done + " " + key + "\n";
+			done += " " + key + "\n";
 		}
 	}
 	console.log(toDo + inProgress + done);
